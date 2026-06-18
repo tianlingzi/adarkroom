@@ -149,12 +149,6 @@
         .appendTo(menu);
 
       $('<span>')
-        .addClass('appStore menuBtn')
-        .text(_('get the app.'))
-        .click(Engine.getApp)
-        .appendTo(menu);
-
-      $('<span>')
         .addClass('lightsOff menuBtn')
         .text(_('lights off.'))
         .click(Engine.turnLightsOff)
@@ -172,11 +166,7 @@
         .click(Engine.confirmDelete)
         .appendTo(menu);
 
-      $('<span>')
-        .addClass('menuBtn')
-        .text(_('share.'))
-        .click(Engine.share)
-        .appendTo(menu);
+
 
       $('<span>')
         .addClass('menuBtn')
@@ -435,92 +425,26 @@
     deleteSave: function(noReload) {
       if(typeof Storage != 'undefined' && localStorage) {
         var prestige = Prestige.get();
+        var currentSlot = SaveManager.currentSlot;
         window.State = {};
-        localStorage.clear();
+
+        // 在当前槽位创建一个空白存档
+        var key = SaveManager.STORAGE_PREFIX + currentSlot;
+        var blankSaveData = {
+          data: JSON.stringify({}),
+          timestamp: Date.now(),
+          version: Engine.VERSION
+        };
+        localStorage.setItem(key, JSON.stringify(blankSaveData));
+
+        // 清空当前游戏状态
+        localStorage.removeItem('gameState');
+
         Prestige.set(prestige);
       }
       if(!noReload) {
         location.reload();
       }
-    },
-
-    getApp: function() {
-      Events.startEvent({
-        title: _('Get the App'),
-        scenes: {
-          start: {
-            text: [_('bring the room with you.')],
-            buttons: {
-              'ios': {
-                text: _('ios'),
-                nextScene: 'end',
-                onChoose: function () {
-                  window.open('https://itunes.apple.com/app/apple-store/id736683061?pt=2073437&ct=adrproper&mt=8');
-                }
-              },
-              'android': {
-                text: _('android'),
-                nextScene: 'end',
-                onChoose: function() {
-                  window.open('https://play.google.com/store/apps/details?id=com.yourcompany.adarkroom');
-                }
-              },
-              'close': {
-                text: _('close'),
-                nextScene: 'end'
-              }
-            }
-          }
-        }
-      });
-    },
-
-    share: function() {
-      Events.startEvent({
-        title: _('Share'),
-        scenes: {
-          start: {
-            text: [_('bring your friends.')],
-            buttons: {
-              'facebook': {
-                text: _('facebook'),
-                nextScene: 'end',
-                onChoose: function() {
-                  window.open('https://www.facebook.com/sharer/sharer.php?u=' + Engine.SITE_URL, 'sharer', 'width=626,height=436,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no');
-                }
-              },
-              'google': {
-                text:_('google+'),
-                nextScene: 'end',
-                onChoose: function() {
-                  window.open('https://plus.google.com/share?url=' + Engine.SITE_URL, 'sharer', 'width=480,height=436,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no');
-                }
-              },
-              'twitter': {
-                text: _('twitter'),
-                nextScene: 'end',
-                onChoose: function() {
-                  window.open('https://twitter.com/intent/tweet?text=A%20Dark%20Room&url=' + Engine.SITE_URL, 'sharer', 'width=660,height=260,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no');
-                }
-              },
-              'reddit': {
-                text: _('reddit'),
-                nextScene: 'end',
-                onChoose: function() {
-                  window.open('http://www.reddit.com/submit?url=' + Engine.SITE_URL, 'sharer', 'width=960,height=700,location=no,menubar=no,resizable=no,scrollbars=yes,status=no,toolbar=no');
-                }
-              },
-              'close': {
-                text: _('close'),
-                nextScene: 'end'
-              }
-            }
-          }
-        }
-      },
-      {
-        width: '400px'
-      });
     },
 
     findStylesheet: function(title) {
