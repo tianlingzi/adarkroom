@@ -663,3 +663,106 @@ body.noMask #description {
 #dropMenu > div:hover {
 	text-decoration: underline;
 }
+
+/* Save Manager */
+#saveManagerPanel {
+	max-height: 700px;
+	overflow-y: auto;
+}
+
+#saveManagerContent {
+	margin-top: 20px;
+}
+
+.saveManagerInfo {
+	margin-bottom: 10px;
+}
+
+.saveManagerButtons {
+	margin-bottom: 20px;
+}
+
+.saveManagerButtons button {
+	margin-right: 10px;
+}
+
+.saveManagerSectionTitle {
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.saveManagerSlots {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.saveManagerSlot {
+	border: 1px solid black;
+	padding: 10px;
+	background-color: #f9f9f9;
+}
+
+.saveManagerSlotHeader {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.saveManagerSlotInfo {
+	font-size: 14px;
+	margin-bottom: 3px;
+	color: #666;
+}
+
+.saveManagerSlotButtons {
+	margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.smBtn {
+	padding: 5px 15px;
+	border: 1px solid black;
+	background-color: white;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 14px;
+}
+
+.smBtn:hover {
+	text-decoration: underline;
+}
+
+.smSlotBtn {
+	padding: 3px 8px;
+	border: 1px solid black;
+	background-color: white;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 12px;
+}
+
+.smSlotBtn:hover:not(:disabled) {
+	text-decoration: underline;
+}
+
+.smSlotBtn:disabled {
+	cursor: default;
+	border-color: #b2b2b2;
+	color: #b2b2b2;
+}
+
+.smSlotBtnDelete {
+	background-color: #ffeaea;
+}
+
+.saveManagerTextarea {
+	width: 100%;
+	height: 150px;
+	font-family: monospace;
+	font-size: 12px;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+}

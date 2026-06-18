@@ -31,8 +31,7 @@ var Events = {
 		Events.EventPool = [].concat(
 			Events.Global,
 			Events.Room,
-			Events.Outside,
-      Events.Marketing
+			Events.Outside
 		);
 
 		Events.eventStack = [];

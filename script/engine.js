@@ -184,6 +184,12 @@
         .click(Engine.exportImport)
         .appendTo(menu);
 
+      $('<span>')
+        .addClass('menuBtn')
+        .text(_('slots.'))
+        .click(() => SaveManager.openSaveManager())
+        .appendTo(menu);
+
       if(this.options.dropbox && Engine.Dropbox) {
         this.dropbox = Engine.Dropbox.init();
 
@@ -218,6 +224,7 @@
       AudioEngine.init();
       Notifications.init();
       Events.init();
+      SaveManager.init();
       Room.init();
 
 
